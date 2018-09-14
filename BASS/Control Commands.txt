@@ -1,0 +1,19 @@
+﻿
+
+
+// To install
+SC CREATE BASSCurrencyService BINPATH= "XPATH" TYPE= SHARE START= AUTO ERROR= NORMAL DISPLAYNAME= "BASS Currency Rate Update Service"
+SC CREATE BASSOfferEmailService BINPATH= "XPATH" TYPE= SHARE START= AUTO ERROR= NORMAL DISPLAYNAME= "BASS Offer Email Service"
+
+// To start
+SC START BASSCurrencyService
+SC START BASSOfferEmailService
+
+// To stop
+SC STOP BASSCurrencyService
+SC STOP BASSOfferEmailService
+
+// To uninstall
+SC DELETE BASSCurrencyService
+SC DELETE BASSOfferEmailService
+
