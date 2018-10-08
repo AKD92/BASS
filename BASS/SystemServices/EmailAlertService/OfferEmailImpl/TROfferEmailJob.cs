@@ -113,7 +113,7 @@ We request you to communicate with client and meet their requirment for translat
 
             string InitMessage = string.Format("Initiating to run offer email algorithm.\nALGORITHM: {0}\nDB: {1}",
                                                     ApplicationContext.ProcedureName, ConnectionString);
-            ServiceLog.WriteEntry(InitMessage, EventLogEntryType.Warning);
+            ServiceLog.WriteEntry(InitMessage, EventLogEntryType.Warning, 45);
             SqlConnection dbConnection = new SqlConnection(ConnectionString);
 
             try
@@ -237,10 +237,12 @@ We request you to communicate with client and meet their requirment for translat
                     Builder.Replace("%txt02%", OrderModel.SourceLanguage);
                     Builder.Replace("%txt03%", string.Format("{0} {1}", CharCount.ToString(), CountType));
                     Builder.Replace("%txt04%", OrderModel.DeliveryPlan);
+                    Builder.Replace("%txt06%", OrderModel.ClientNo);
                     Builder.Replace("%txt07%", OrderModel.OrderNo);
                     Builder.Replace("%txt08%", Comment);
                     Builder.Replace("%txt09%", OrderModel.MenuScript.Substring(0, OrderModel.MenuScript.Length / 3));
                     Builder.Replace("%txt10%", string.Format("{0} AUD ({1} JPY)", PaymentAmount_AU.ToString(), PaymentAmount_JP.ToString()));
+                    Builder.Replace("%txtDeliveryLevel%", model.DeliveryLevelName);
 
                     try
                     {
@@ -325,7 +327,7 @@ We request you to communicate with client and meet their requirment for translat
             
             Log.AppendLine("Process finished.");
             if (WriteEventLog == true)
-                ServiceLog.WriteEntry(Log.ToString(), EventLogEntryType.Information);
+                ServiceLog.WriteEntry(Log.ToString(), EventLogEntryType.Information, 100);
             return;
         }
 

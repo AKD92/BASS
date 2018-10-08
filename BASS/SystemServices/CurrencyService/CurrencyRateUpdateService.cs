@@ -21,7 +21,6 @@ using System.Configuration;
 using Quartz;
 using Quartz.Impl;
 using System.Diagnostics;
-using System.Threading;
 using BASS.SystemServices.CurrencyService.CurrencyRateUpdateImpl;
 
 
@@ -93,7 +92,7 @@ namespace BASS.SystemServices.CurrencyService
             
             if (ServiceLog.MaximumKilobytes < 51200)
             {
-                ServiceLog.MaximumKilobytes = 51200;
+                ServiceLog.MaximumKilobytes = 51200;       // Set our custom EventLog size to 50MB
             }
         }
 
@@ -101,12 +100,14 @@ namespace BASS.SystemServices.CurrencyService
         {
             base.OnPause();
             Scheduler.PauseAll();
+            ServiceLog.WriteEntry("Service paused successfully.", EventLogEntryType.Information);
         }
 
         protected override void OnContinue()
         {
             base.OnContinue();
             Scheduler.ResumeAll();
+            ServiceLog.WriteEntry("Service resumed successfully.", EventLogEntryType.Information);
         }
 
         protected override void OnStop()

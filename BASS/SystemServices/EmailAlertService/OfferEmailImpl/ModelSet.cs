@@ -45,7 +45,7 @@ namespace BASS.SystemServices.EmailAlertService.OfferEmailImpl
         public Guid? SubSpecialityFieldID { get; set; }
         public Guid ClientID { get; set; }
         public int TranslationLevelType { get; set; }
-        public long ClientNo { get; set; }
+        public string ClientNo { get; set; }
         public string ClientName { get; set; }
         public string EmployeeName { get; set; }
         public string AffiliateCompanyName { get; set; }

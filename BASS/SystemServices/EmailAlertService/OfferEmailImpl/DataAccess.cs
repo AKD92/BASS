@@ -170,7 +170,7 @@ namespace BASS.SystemServices.EmailAlertService.OfferEmailImpl
                     order.ID = Guid.Parse(dataReader["ID"].ToString());
                     order.DeliveryPlanID = Convert.ToInt64(dataReader["DeliveryPlanID"].ToString());
                     order.ClientID = Guid.Parse(dataReader["ClientId"].ToString());
-                    order.ClientNo = Convert.ToInt64(dataReader["ClientNo"].ToString());
+                    order.ClientNo = dataReader["ClientNo"].ToString();
 
                     order.ApplicationName = dataReader["ApplicationName"].ToString();
                     order.AssignedTranslatorID = dataReader["AssignedTranslatorID"] == DBNull.Value ? (Guid?)null : Guid.Parse(dataReader["AssignedTranslatorID"].ToString());

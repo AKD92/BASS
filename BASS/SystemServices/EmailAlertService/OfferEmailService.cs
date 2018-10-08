@@ -1,11 +1,26 @@
 ﻿
+
+/* ***********************************************************************************************************************
+ * 
+ * Synopsis:
+ * Implementation of Automatic Offer Email service for TransPRo AU (AppID: 2)
+ * Using Quartz Job Scheduler library.
+ * CRON scheduling method is used.
+ * 
+ * Creation Date    :   10-July-2018
+ * Programmed By    :   Ashis Kr. Das
+ * 
+ * **********************************************************************************************************************/
+
+
+
+
 using System;
 using System.ServiceProcess;
 using System.Configuration;
 using Quartz;
 using Quartz.Impl;
 using System.Diagnostics;
-using System.Threading;
 using BASS.SystemServices.EmailAlertService.OfferEmailImpl;
 
 namespace BASS.SystemServices.EmailAlertService
@@ -73,7 +88,7 @@ namespace BASS.SystemServices.EmailAlertService
             
             if (this.ServiceLog.MaximumKilobytes < 51200)
             {
-                this.ServiceLog.MaximumKilobytes = 51200;
+                this.ServiceLog.MaximumKilobytes = 51200;       // Set our custom EventLog size to 50MB
             }
         }
 
@@ -81,12 +96,14 @@ namespace BASS.SystemServices.EmailAlertService
         {
             base.OnPause();
             Scheduler.PauseAll();
+            ServiceLog.WriteEntry("Service paused successfully.", EventLogEntryType.Information);
         }
 
         protected override void OnContinue()
         {
             base.OnContinue();
             Scheduler.ResumeAll();
+            ServiceLog.WriteEntry("Service resumed successfully.", EventLogEntryType.Information);
         }
 
         protected override void OnStop()
